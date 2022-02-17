@@ -1,14 +1,13 @@
 import { useState, ChangeEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from './state/store';
+import { useAppDispatch, useAppSelector } from './state/hooks';
 
 import { login, logout } from './state/features/authentication/authentication';
 
 const App = () => {
   const [loginUsername, setLoginUsername] = useState('');
-  const { username } = useSelector((state: RootState) => state.authentication);
-  const dispatch = useDispatch();
+  const { username } = useAppSelector((state) => state.authentication);
+  const dispatch = useAppDispatch();
 
   const handleLoginUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLoginUsername(event.target.value);
