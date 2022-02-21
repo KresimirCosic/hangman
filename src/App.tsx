@@ -2,7 +2,11 @@ import { useState, ChangeEvent } from 'react';
 
 import { useAppDispatch, useAppSelector } from './state/hooks';
 
-import { login, logout } from './state/features/authentication/authentication';
+import {
+  login,
+  logout,
+  getContent,
+} from './state/features/authentication/authentication';
 
 const App = () => {
   const [loginUsername, setLoginUsername] = useState('');
@@ -21,6 +25,10 @@ const App = () => {
     dispatch(logout());
   };
 
+  const handleGetContent = () => {
+    dispatch(getContent());
+  };
+
   return (
     <div className='App'>
       {username && <h1>{username}</h1>}
@@ -31,6 +39,7 @@ const App = () => {
       />
       <button onClick={handleLogin}>Login</button>
       <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleGetContent}>Get content</button>
     </div>
   );
 };
