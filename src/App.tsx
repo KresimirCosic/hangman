@@ -4,10 +4,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAppSelector } from './state/hooks';
 
 import AppLoder from './components/appLoader/AppLoader';
-import Navbar from './components/navbar/Navbar';
+
+import Shell from './components/utility/Shell/Shell';
 
 import Home from './components/pages/home/Home';
 import Login from './components/pages/login/Login';
+import NotFound from './components/pages/NotFound/NotFound';
 
 const App: FC = () => {
   const { appLoader } = useAppSelector((state) => state.userInterface);
@@ -17,11 +19,12 @@ const App: FC = () => {
       {appLoader && <AppLoder />}
 
       <BrowserRouter>
-        <Navbar />
-
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='login' element={<Login />} />
+          <Route path='/' element={<Shell />}>
+            <Route index element={<Home />} />
+            <Route path='login' element={<Login />} />
+          </Route>
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

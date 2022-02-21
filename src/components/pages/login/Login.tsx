@@ -1,10 +1,14 @@
 import { FC } from 'react';
 
+import AnonymousRoute from '../../utility/AnonymousRoute/AnonymousRoute';
+
 const Login: FC = () => {
   return (
-    <div id='Login' className='Login'>
-      <h1>Login works!</h1>
-    </div>
+    <AnonymousRoute>
+      <div id='Login' className='Login'>
+        <h1>Login works!</h1>
+      </div>
+    </AnonymousRoute>
   );
 };
 
