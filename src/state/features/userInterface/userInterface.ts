@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { getNewText } from '../game/game';
+
 interface UserInterfaceState {
   appLoader: boolean;
 }
@@ -18,6 +20,18 @@ export const userInterfaceSlice = createSlice({
     turnAppLoaderOff: (state) => {
       state.appLoader = false;
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getNewText.pending, (state) => {
+        state.appLoader = true;
+      })
+      .addCase(getNewText.fulfilled, (state) => {
+        state.appLoader = false;
+      })
+      .addCase(getNewText.rejected, (state) => {
+        state.appLoader = false;
+      });
   },
 });
 
