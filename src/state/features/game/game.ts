@@ -53,7 +53,10 @@ export const gameSlice = createSlice({
       }
     },
     reset: (state) => {
-      state = { ...initialState };
+      state.status = initialState.status;
+      state.text = initialState.text;
+      state.correctLetters = initialState.correctLetters;
+      state.wrongLetters = initialState.wrongLetters;
     },
   },
   extraReducers(builder) {
@@ -65,7 +68,7 @@ export const gameSlice = createSlice({
         getNewTextThunk.fulfilled,
         (state, action: PayloadAction<APIResponse>) => {
           state.status = 'succeeded';
-          state.text = action.payload.content;
+          state.text = action.payload.author;
         }
       )
       .addCase(getNewTextThunk.rejected, (state) => {

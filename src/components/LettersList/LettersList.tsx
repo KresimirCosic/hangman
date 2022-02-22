@@ -50,7 +50,9 @@ const LettersList: FC<ILettersListProps> = ({
         <li key={letter} className='LettersList-item'>
           <Letter
             disabled={
-              correctLetters.includes(letter) || wrongLetters.includes(letter)
+              wrongLetters.length > 5 ||
+              correctLetters.includes(letter) ||
+              wrongLetters.includes(letter)
             }
             handleLetterAttempt={handleLetterAttempt}
             letter={letter}

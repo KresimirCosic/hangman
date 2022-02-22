@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../../state/hooks';
 
 import {
   attempt,
+  reset,
   getNewTextThunk,
   PossibleLetter,
 } from '../../../state/features/game/game';
@@ -41,6 +42,16 @@ const Home: FC = () => {
               wrongLetters={wrongLetters}
               handleLetterAttempt={handleLetterAttempt}
             />
+          )}
+          {wrongLetters.length > 5 && (
+            <button
+              onClick={() => {
+                dispatch(reset());
+                dispatch(getNewTextThunk());
+              }}
+            >
+              Reset game
+            </button>
           )}
         </div>
       </Page>
