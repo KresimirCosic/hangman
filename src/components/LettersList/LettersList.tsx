@@ -1,6 +1,12 @@
 import { FC } from 'react';
 
+import { PossibleLetter } from '../../state/features/game/game';
+
 import Letter from '../Letter/Letter';
+
+interface ILettersListProps {
+  handleLetterAttempt: (letter: PossibleLetter) => void;
+}
 
 export const lettersList = [
   'a',
@@ -31,12 +37,12 @@ export const lettersList = [
   'z',
 ] as const;
 
-const LettersList: FC = () => {
+const LettersList: FC<ILettersListProps> = ({ handleLetterAttempt }) => {
   return (
     <ul id='LettersList' className='LettersList'>
       {lettersList.map((letter) => (
         <li key={letter} className='LettersList-item'>
-          <Letter letter={letter} />
+          <Letter handleLetterAttempt={handleLetterAttempt} letter={letter} />
         </li>
       ))}
     </ul>
