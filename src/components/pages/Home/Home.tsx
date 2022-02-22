@@ -17,12 +17,28 @@ import Text from '../../Text/Text';
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
-  const { text, correctLetters, wrongLetters } = useAppSelector(
+  const { status, text, correctLetters, wrongLetters } = useAppSelector(
     (state) => state.game
   );
 
   const handleLetterAttempt = (letter: PossibleLetter) => {
     dispatch(attempt(letter));
+  };
+
+  const isGameLost = () => {
+    return wrongLetters.length > 5;
+  };
+
+  const isGameWon = () => {
+    return text.split('').every((textLetter) => {
+      return correctLetters.find((letter) =>
+        letter.includes(textLetter as PossibleLetter)
+      );
+    });
+  };
+
+  const isGameOver = () => {
+    return status === 'succeeded' && (isGameLost() || isGameWon());
   };
 
   return (
@@ -35,14 +51,15 @@ const Home: FC = () => {
             </button>
           )}
           {text && <Text text={text} correctLetters={correctLetters} />}
-          {text && (
+          {text && !isGameOver() && (
             <LettersList
               correctLetters={correctLetters}
               wrongLetters={wrongLetters}
               handleLetterAttempt={handleLetterAttempt}
             />
           )}
-          {wrongLetters.length > 5 && (
+          {isGameWon() && <h1>You won!</h1>}
+          {isGameOver() && (
             <button
               onClick={() => {
                 dispatch(reset());

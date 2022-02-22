@@ -43,11 +43,8 @@ export const gameSlice = createSlice({
         state.wrongLetters.push(payload);
       }
     },
-    reset: (state) => {
-      state.status = initialState.status;
-      state.text = initialState.text;
-      state.correctLetters = initialState.correctLetters;
-      state.wrongLetters = initialState.wrongLetters;
+    reset: () => {
+      return initialState;
     },
   },
   extraReducers(builder) {
