@@ -2,17 +2,23 @@ import { FC } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../../state/hooks';
 
-import { PossibleLetter, attempt } from '../../../state/features/game/game';
+import {
+  attempt,
+  getNewTextThunk,
+  PossibleLetter,
+} from '../../../state/features/game/game';
 
 import ProtectedRoute from '../../utility/ProtectedRoute/ProtectedRoute';
 import Page from '../../utility/Page/Page';
 
 import LettersList from '../../LettersList/LettersList';
+import Text from '../../Text/Text';
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
-  const { status, text, numberOfTries, correctLetters, wrongLetters } =
-    useAppSelector((state) => state.game);
+  const { text, correctLetters, wrongLetters } = useAppSelector(
+    (state) => state.game
+  );
 
   const handleLetterAttempt = (letter: PossibleLetter) => {
     dispatch(attempt(letter));
@@ -22,7 +28,20 @@ const Home: FC = () => {
     <ProtectedRoute>
       <Page>
         <div id='Home' className='Home'>
-          <LettersList handleLetterAttempt={handleLetterAttempt} />
+          {!text && (
+            <button onClick={() => dispatch(getNewTextThunk())}>
+              Start game
+            </button>
+          )}
+          <h1>{text}</h1>
+          {text && <Text />}
+          {text && (
+            <LettersList
+              correctLetters={correctLetters}
+              wrongLetters={wrongLetters}
+              handleLetterAttempt={handleLetterAttempt}
+            />
+          )}
         </div>
       </Page>
     </ProtectedRoute>

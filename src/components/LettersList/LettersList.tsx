@@ -5,6 +5,8 @@ import { PossibleLetter } from '../../state/features/game/game';
 import Letter from '../Letter/Letter';
 
 interface ILettersListProps {
+  correctLetters: PossibleLetter[];
+  wrongLetters: PossibleLetter[];
   handleLetterAttempt: (letter: PossibleLetter) => void;
 }
 
@@ -37,12 +39,22 @@ export const lettersList = [
   'z',
 ] as const;
 
-const LettersList: FC<ILettersListProps> = ({ handleLetterAttempt }) => {
+const LettersList: FC<ILettersListProps> = ({
+  correctLetters,
+  wrongLetters,
+  handleLetterAttempt,
+}) => {
   return (
     <ul id='LettersList' className='LettersList'>
       {lettersList.map((letter) => (
         <li key={letter} className='LettersList-item'>
-          <Letter handleLetterAttempt={handleLetterAttempt} letter={letter} />
+          <Letter
+            disabled={
+              correctLetters.includes(letter) || wrongLetters.includes(letter)
+            }
+            handleLetterAttempt={handleLetterAttempt}
+            letter={letter}
+          />
         </li>
       ))}
     </ul>

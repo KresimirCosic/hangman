@@ -9,7 +9,6 @@ interface GameState {
   text: string;
   wrongLetters: PossibleLetter[];
   correctLetters: PossibleLetter[];
-  numberOfTries: number;
 }
 
 const initialState: GameState = {
@@ -17,7 +16,6 @@ const initialState: GameState = {
   text: '',
   wrongLetters: [],
   correctLetters: [],
-  numberOfTries: 0,
 };
 
 interface APIResponse {
@@ -45,8 +43,14 @@ export const gameSlice = createSlice({
       const { payload } = action;
 
       if (payload.length > 1) return;
-      if (state.text.indexOf(payload) > -1) state.correctLetters.push(payload);
-      else state.wrongLetters.push(payload);
+      if (
+        state.text.indexOf(payload) > -1 &&
+        !state.correctLetters.includes(payload)
+      ) {
+        state.correctLetters.push(payload);
+      } else if (!state.wrongLetters.includes(payload)) {
+        state.wrongLetters.push(payload);
+      }
     },
     reset: (state) => {
       state = { ...initialState };
