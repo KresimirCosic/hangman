@@ -1,0 +1,17 @@
+.LettersList {
+  display: flex;
+  flex-wrap: wrap;
+  &-item {
+    display: block;
+    width: 10%;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+    @media screen and (max-width: $breakpoint-md) {
+      width: 20%;
+    }
+    @media screen and (max-width: $breakpoint-sm) {
+      width: 50%;
+    }
+  }
+}

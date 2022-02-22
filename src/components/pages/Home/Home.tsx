@@ -14,12 +14,14 @@ import Page from '../../utility/Page/Page';
 
 import LettersList from '../../LettersList/LettersList';
 import Text from '../../Text/Text';
+import AppLoader from '../../AppLoader/AppLoader';
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
   const { status, text, correctLetters, wrongLetters } = useAppSelector(
     (state) => state.game
   );
+  const { appLoader } = useAppSelector((state) => state.userInterface);
 
   const handleLetterAttempt = (letter: PossibleLetter) => {
     dispatch(attempt(letter));
@@ -48,12 +50,19 @@ const Home: FC = () => {
     <ProtectedRoute>
       <Page>
         <div id='Home' className='Home'>
-          {!text && (
-            <button onClick={() => dispatch(getNewTextThunk())}>
+          {appLoader && <AppLoader />}
+
+          {status !== 'loading' && !text && (
+            <button
+              className='Home-start'
+              onClick={() => dispatch(getNewTextThunk())}
+            >
               Start game
             </button>
           )}
+
           {text && <Text text={text} correctLetters={correctLetters} />}
+
           {text && !isGameOver() && (
             <LettersList
               correctLetters={correctLetters}
@@ -61,9 +70,12 @@ const Home: FC = () => {
               handleLetterAttempt={handleLetterAttempt}
             />
           )}
+
           {isGameWon() && <h1>You won!</h1>}
+
           {isGameOver() && (
             <button
+              className='Home-reset'
               onClick={() => {
                 dispatch(reset());
                 dispatch(getNewTextThunk());

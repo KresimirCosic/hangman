@@ -3,12 +3,16 @@
 @import './variables';
 @import './globals';
 
+@import './components/utility/Shell/Shell';
 @import './components/utility/Page/Page';
+
+@import './components/pages/Home/Home';
+@import './components/pages/Login/Login';
+@import './components/pages/NotFound/NotFound';
 
 @import './components/AppLoader/AppLoader';
 @import './components/Letter/Letter';
 @import './components/LettersList/LettersList';
 @import './components/LoginForm/LoginForm';
-@import './components/Navbar/Navbar';
 @import './components/Text/Text';
 @import './components/TextLetter/TextLetter';
