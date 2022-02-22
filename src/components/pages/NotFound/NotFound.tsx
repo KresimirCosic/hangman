@@ -1,10 +1,14 @@
 import { FC } from 'react';
 
+import Page from '../../utility/Page/Page';
+
 const NotFound: FC = () => {
   return (
-    <div id='NotFound' className='NotFound'>
-      <h1>404 - Not Found</h1>
-    </div>
+    <Page>
+      <div id='NotFound' className='NotFound'>
+        <h1>404 - Not Found</h1>
+      </div>
+    </Page>
   );
 };
 
