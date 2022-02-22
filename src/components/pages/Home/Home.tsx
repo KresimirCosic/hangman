@@ -30,11 +30,14 @@ const Home: FC = () => {
   };
 
   const isGameWon = () => {
-    return text.split('').every((textLetter) => {
-      return correctLetters.find((letter) =>
-        letter.includes(textLetter as PossibleLetter)
-      );
-    });
+    return (
+      status === 'succeeded' &&
+      text.split('').every((textLetter) => {
+        return correctLetters.find((letter) =>
+          letter.includes(textLetter as PossibleLetter)
+        );
+      })
+    );
   };
 
   const isGameOver = () => {

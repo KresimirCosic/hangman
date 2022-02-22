@@ -27,3 +27,29 @@ a {
   text-decoration: none;
   color: $color-primary;
 }
+
+form {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  .form-field {
+    width: 100%;
+    &-container {
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+input {
+  padding: 0.5rem 1rem;
+}
+
+button {
+  transition: all 350ms;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

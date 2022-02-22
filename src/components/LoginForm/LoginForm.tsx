@@ -20,14 +20,14 @@ const LoginForm: FC = () => {
   return (
     <form
       id='LoginForm'
-      className='LoginForm'
+      className='LoginForm form'
       onSubmit={(event) => handleSubmit(event)}
     >
-      <div className='LoginForm-field-container'>
+      <div className='LoginForm-field-container form-field-container'>
         <input
           onChange={handleChange}
           type='text'
-          className='LoginForm-field'
+          className='LoginForm-field form-field'
           placeholder='Username'
           value={username}
         />

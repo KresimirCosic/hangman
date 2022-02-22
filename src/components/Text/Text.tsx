@@ -18,7 +18,7 @@ const Text: FC<ITextProps> = ({ text, correctLetters }) => {
           correctLetters.includes(textLetter as PossibleLetter) ? (
             <TextLetter textLetter={textLetter as PossibleLetter} />
           ) : (
-            '_'
+            <TextLetter textLetter={'_' as PossibleLetter} />
           )
         )}
     </div>
