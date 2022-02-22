@@ -18,19 +18,10 @@ const initialState: GameState = {
   correctLetters: [],
 };
 
-interface APIResponse {
-  author: string;
-  authorSlug: string;
-  content: string;
-  dateAdded: string;
-  dateModified: string;
-  length: number;
-  tags: string[];
-  _id: string;
-}
+type APIResponse = string[];
 
 export const getNewTextThunk = createAsyncThunk('game/getNewText', async () => {
-  const response = await fetch('http://api.quotable.io/random');
+  const response = await fetch('https://random-word-api.herokuapp.com/word');
   const data: APIResponse = await response.json();
   return data;
 });
@@ -68,7 +59,7 @@ export const gameSlice = createSlice({
         getNewTextThunk.fulfilled,
         (state, action: PayloadAction<APIResponse>) => {
           state.status = 'succeeded';
-          state.text = action.payload.author;
+          state.text = action.payload[0];
         }
       )
       .addCase(getNewTextThunk.rejected, (state) => {

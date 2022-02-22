@@ -34,8 +34,7 @@ const Home: FC = () => {
               Start game
             </button>
           )}
-          <h1>{text}</h1>
-          {text && <Text />}
+          {text && <Text text={text} correctLetters={correctLetters} />}
           {text && (
             <LettersList
               correctLetters={correctLetters}
