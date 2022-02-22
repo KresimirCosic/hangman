@@ -55,7 +55,7 @@ interface APIResponse {
   _id: string;
 }
 
-export const getNewText = createAsyncThunk('game/getNewText', async () => {
+export const getNewTextThunk = createAsyncThunk('game/getNewText', async () => {
   const response = await fetch('http://api.quotable.io/random');
   const data: APIResponse = await response.json();
   return data;
@@ -78,17 +78,17 @@ export const gameSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getNewText.pending, (state) => {
+      .addCase(getNewTextThunk.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(
-        getNewText.fulfilled,
+        getNewTextThunk.fulfilled,
         (state, action: PayloadAction<APIResponse>) => {
           state.status = 'succeeded';
           state.text = action.payload.content;
         }
       )
-      .addCase(getNewText.rejected, (state) => {
+      .addCase(getNewTextThunk.rejected, (state) => {
         state.status = 'failed';
       });
   },
