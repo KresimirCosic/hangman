@@ -3,12 +3,14 @@ import { FC } from 'react';
 import ProtectedRoute from '../../utility/ProtectedRoute/ProtectedRoute';
 import Page from '../../utility/Page/Page';
 
+import LettersList from '../../LettersList/LettersList';
+
 const Home: FC = () => {
   return (
     <ProtectedRoute>
       <Page>
         <div id='Home' className='Home'>
-          <h1>Home works!</h1>
+          <LettersList />
         </div>
       </Page>
     </ProtectedRoute>

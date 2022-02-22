@@ -13,8 +13,21 @@ const initialState: AuthenticationState = {
 export const loginThunk = createAsyncThunk(
   'authentication/login',
   async (username: string) => {
-    const data: string = await new Promise((resolve) => {
-      setTimeout(() => resolve(username), 500);
+    const data = await new Promise<string>((resolve, reject) => {
+      setTimeout(() => {
+        username ? resolve(username) : reject('No username provided');
+      }, 500);
+    });
+
+    return data;
+  }
+);
+
+export const logoutThunk = createAsyncThunk(
+  'authentication/logout',
+  async () => {
+    const data = await new Promise<void>((resolve) => {
+      setTimeout(() => resolve(), 500);
     });
 
     return data;
@@ -42,6 +55,16 @@ export const authenticationSlice = createSlice({
         state.username = action.payload;
       })
       .addCase(loginThunk.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(logoutThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(logoutThunk.fulfilled, (state) => {
+        state.status = 'succeeded';
+        state.username = '';
+      })
+      .addCase(logoutThunk.rejected, (state) => {
         state.status = 'failed';
       });
   },
