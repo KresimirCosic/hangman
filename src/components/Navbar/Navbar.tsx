@@ -1,8 +1,6 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './Navbar.scss';
-
 const Navbar: FC = () => {
   return (
     <div id='Navbar' className='Navbar'>

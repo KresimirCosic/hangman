@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { useAppSelector } from './state/hooks';
 
-import AppLoder from './components/appLoader/AppLoader';
+import AppLoder from './components/AppLoader/AppLoader';
 
 import Shell from './components/utility/Shell/Shell';
 
-import Home from './components/pages/home/Home';
-import Login from './components/pages/login/Login';
+import Home from './components/pages/Home/Home';
+import Login from './components/pages/Login/Login';
 import NotFound from './components/pages/NotFound/NotFound';
 
 const App: FC = () => {
