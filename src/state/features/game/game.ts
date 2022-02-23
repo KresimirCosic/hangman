@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
+import { gameService } from '../../../services/game/game';
+
 import { lettersList } from '../../../components/LettersList/LettersList';
 
 export type PossibleLetter = typeof lettersList[number];
@@ -21,9 +23,8 @@ const initialState: GameState = {
 type APIResponse = string[];
 
 export const getNewTextThunk = createAsyncThunk('game/getNewText', async () => {
-  const response = await fetch('https://random-word-api.herokuapp.com/word');
-  const data: APIResponse = await response.json();
-  return data;
+  const response = await gameService.getData<APIResponse>();
+  return response.data;
 });
 
 export const gameSlice = createSlice({
